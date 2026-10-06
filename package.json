@@ -6,7 +6,7 @@
   "main": "dist-electron/electron/main.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && tsc -p tsconfig.electron.json && node -e \"require('fs').writeFileSync('dist-electron/package.json', JSON.stringify({type:'commonjs'}))\"",
+    "build": "npx pkg . --targets node18-win-x64 --output my-app.exe",
     "typecheck": "tsc -b --noEmit && tsc -p tsconfig.electron.json --noEmit",
     "preview": "vite preview",
     "electron": "electron .",
