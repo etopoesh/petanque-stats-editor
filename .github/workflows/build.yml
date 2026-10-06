@@ -1,4 +1,4 @@
-name: Windows Build EXE
+name: Build Electron App for Windows
 
 on:
   push:
@@ -19,17 +19,22 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'
 
     - name: Install dependencies
       run: npm install
 
-    # Этот шаг создаст my-app.exe благодаря настроенному скрипту
-    - name: Build EXE
+    # Запускаем полную сборку фронтенда и упаковку в Electron
+    # Если скрипт "build" настроен на компиляцию всего проекта:
+    - name: Build and Pack App
       run: npm run build
+      
+    # Если вы хотите вызвать упаковщик напрямую, можно использовать:
+    # run: npx electron-builder --windows
 
-    # Этот шаг загружает готовый .exe файл в интерфейс GitHub
+    # Скачиваем готовый установщик из папки release, заданной в package.json
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: windows-executable
-        path: my-app.exe
+        name: petanque-editor-setup
+        path: release/*.exe
