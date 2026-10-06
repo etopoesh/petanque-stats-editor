@@ -6,7 +6,7 @@
   "main": "dist-electron/electron/main.js",
   "scripts": {
     "dev": "vite",
-    "build": "npx pkg . --targets node18-win-x64 --output my-app.exe",
+    "build": "tsc && vite build && tsc -p tsconfig.electron.json && vite build --config vite.config.electron.ts",
     "typecheck": "tsc -b --noEmit && tsc -p tsconfig.electron.json --noEmit",
     "preview": "vite preview",
     "electron": "electron .",
